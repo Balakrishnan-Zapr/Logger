@@ -1,4 +1,3 @@
-
 # Logger
 
 Logger library is a basic logger to print the logs in the console and save to the file.
@@ -16,6 +15,25 @@ Maven repository :
         <artifactId>phonepe</artifactId>
         <version>1.0-SNAPSHOT</version>
     </dependency>
+```
+
+Configuration (Using YAML config) to initialize the Logger in the application :
+```sh
+sinkConfigurations: // Multiple Sink configurations
+  - ts_format: "<timestamp format>"
+    log_level: //Multiple log level
+      - "INFO"
+      - "ERROR"
+      - "WARN"
+    sink_type: "<CONSOLE/ FILE/ DATABASE>"
+    file_location: "<File location>"
+  - ts_format: "<timestamp format>"
+    log_level: // Multiple log level
+      - "FATAL"
+      - "VERBOSE"
+      - "DEBUG"
+    sink_type: "<CONSOLE/ FILE/ DATABASE>"
+    file_location: "<File location>"
 ```
 
 Logger intialization :
@@ -36,7 +54,7 @@ To implement custom sink :
 ```sh
       CustomSink {
         CustomSink() {
-            // Build Sink  
+            // Build Sink using Configuration builder  
         }
         
         @Override
@@ -59,5 +77,4 @@ Log statement :
   - Database sink
   - Modes of writing log to sink (Sync or Async)
   - Benefit of adding custom implementation of logger sink to save. 
-
 
