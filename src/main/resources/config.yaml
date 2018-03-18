@@ -1,0 +1,18 @@
+sinkConfigurations:
+  - ts_format: "dd­MM­yyyy­hh­mm­ss"
+    log_level:
+      - "INFO"
+      - "ERROR"
+    sink_type: "FILE"
+    file_location: "/Users/ebizu/app/info.log"
+    thread_model: "SINGLE"
+    write_mode: "SYNC"
+
+  - ts_format: "dd­MM­yyyy hh­mm­ss"
+    log_level:
+      - "FATAL"
+      - "VERBOSE"
+    sink_type: "FILE"
+    file_location: "/Users/ebizu/app/fatal.log"
+    thread_model: "SINGLE"
+    write_mode: "SYNC"
