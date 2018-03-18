@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import org.phonepe.log.configuration.Configuration;
+import org.phonepe.log.configuration.ConfigurationInterpreter;
+import org.phonepe.log.configuration.ConfigurationInterpreterImpl;
 import org.phonepe.log.configuration.SinkConfiguration;
 import org.phonepe.log.constants.Constants;
 import org.phonepe.log.constants.Constants.LogLevel;
@@ -19,18 +21,32 @@ public class LoggerImpl implements Logger{
   private Map<String, SinkConfiguration> configurationMap = new HashMap<>();
 
 
-  public LoggerImpl(Configuration configuration) throws LoggerException {
+  public LoggerImpl(String configurationPath) throws LoggerException {
 
-    for (SinkConfiguration sinkConfiguration : configuration.getSinkConfigurations()) {
-      for (String logLevel : sinkConfiguration.getLogLevel()) {
-        configurationMap.put(logLevel, sinkConfiguration);
+    ConfigurationInterpreter configurationInterpreter = new ConfigurationInterpreterImpl();
+    Configuration configuration = null;
 
-        if (sinkConfiguration.getSinkType().equalsIgnoreCase(SinkType.FILE)) {
-          if (!FileUtils.isWritable(sinkConfiguration.getFileLocation())) {
-            throw new LoggerException("Unable to write to file, write permission is unavailable");
+    try {
+      configuration = configurationInterpreter.interpretConfiguration(
+          configurationPath
+      );
+    } catch (IOException e) {
+      error("Logger", "Configuration is not available, using default logger configuration");
+    }
+
+    if (configuration != null) {
+
+      for (SinkConfiguration sinkConfiguration : configuration.getSinkConfigurations()) {
+        for (String logLevel : sinkConfiguration.getLogLevel()) {
+          configurationMap.put(logLevel, sinkConfiguration);
+
+          if (sinkConfiguration.getSinkType().equalsIgnoreCase(SinkType.FILE)) {
+            if (!FileUtils.isWritable(sinkConfiguration.getFileLocation())) {
+              throw new LoggerException("Unable to write to file, write permission is unavailable");
+            }
           }
-        }
 
+        }
       }
     }
 

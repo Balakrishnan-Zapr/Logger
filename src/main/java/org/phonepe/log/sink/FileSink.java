@@ -53,8 +53,7 @@ public class FileSink extends Sink {
     String timestamp = simpleDateFormat.format(new Date(System.currentTimeMillis()));
     try {
       fileWriter.append(
-          String.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message,
-          "\n"));
+          String.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message));
       fileWriter.flush();
       fileWriter.close();
     } catch (IOException e) {

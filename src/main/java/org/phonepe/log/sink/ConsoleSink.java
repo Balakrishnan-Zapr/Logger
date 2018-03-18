@@ -18,11 +18,10 @@ public class ConsoleSink extends Sink {
     String timestamp = simpleDateFormat.format(new Date(System.currentTimeMillis()));
     if (logLevel.equalsIgnoreCase(Constants.LogLevel.ERROR) ||
         logLevel.equalsIgnoreCase(Constants.LogLevel.FATAL)) {
-      System.err.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message,
-          "");
+      System.err.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message);
+    } else {
+      System.out.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message);
     }
-    System.out.format(Constants.MESSAGE_FORMAT, timestamp, logLevel, namespace, message,
-        "");
   }
 
 

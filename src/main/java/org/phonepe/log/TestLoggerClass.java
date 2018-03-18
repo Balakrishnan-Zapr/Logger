@@ -17,7 +17,8 @@ public class TestLoggerClass {
           "/Users/ebizu/Work/opensrcprojects/Logger/src/main/resources/config.yaml"
       );
 
-      Logger logger = new LoggerImpl(configuration);
+      Logger logger = new LoggerImpl("/Users/ebizu/Work/opensrcprojects/Logger/src/main/resources/config1.yaml");
+
 
       logger.info(TestLoggerClass.class.getName(), "Hello");
 

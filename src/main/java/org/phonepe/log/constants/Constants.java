@@ -2,7 +2,7 @@ package org.phonepe.log.constants;
 
 public class Constants {
 
-  public static final String MESSAGE_FORMAT = "[%s] %s : %s : %s %s";
+  public static final String MESSAGE_FORMAT = "[%s] %s : %s : %s \n";
 
   public class LogLevel {
     public static final String ERROR = "ERROR";
